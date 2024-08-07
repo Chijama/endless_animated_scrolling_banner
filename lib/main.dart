@@ -1,4 +1,4 @@
-import 'package:endless_animated_scrolling_banner/endless_animated_scrolling_banner.dart';
+import 'package:endless_animated_scrolling_banner/my_home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,13 +11,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Endless Scrolling Animated Banner',
-      home: const EndlessScrollingBanner(scrollSpeed: 3.0, listOfStrings: 
-     ["plan ", "design ", "implement ","test", "deploy ","maintain"]
-      ,),
-    );
+    return const MaterialApp(
+        title: 'Endless Scrolling Animated Banner',
+        debugShowCheckedModeBanner: false,
+        home: MyHomePage());
   }
 }
-
-
