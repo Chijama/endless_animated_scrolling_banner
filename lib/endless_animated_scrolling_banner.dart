@@ -1,17 +1,15 @@
-import 'package:endless_animated_scrolling_banner/custom_banner.dart';
 import 'package:flutter/material.dart';
-
 
 class EndlessScrollingAnimatedBanner extends StatefulWidget {
   const EndlessScrollingAnimatedBanner({
     super.key,
     required this.scrollSpeed,
-    required this.listOfStrings, this.spacing,
+    required this.bannerBuilder,
   });
-  final double scrollSpeed;
-  final double? spacing;
 
-  final List<String> listOfStrings;
+  final double scrollSpeed;
+  final Widget Function(ScrollController) bannerBuilder;
+
   @override
   State<EndlessScrollingAnimatedBanner> createState() =>
       _EndlessScrollingAnimatedBannerState();
@@ -54,13 +52,7 @@ class _EndlessScrollingAnimatedBannerState
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CustomBanner(
-        scrollController: _scrollController,
-        listOfStrings: widget.listOfStrings,
-        spacing: widget.spacing,
-      ),
+      child: widget.bannerBuilder(_scrollController),
     );
   }
 }
-
-

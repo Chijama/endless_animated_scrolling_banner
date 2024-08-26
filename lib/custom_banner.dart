@@ -4,15 +4,17 @@ import 'dart:math' as math;
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomBanner extends StatelessWidget {
-  const CustomBanner(
-      {super.key,
-      required this.scrollController,
-      required this.listOfStrings,
-      this.spacing});
+  const CustomBanner({
+    super.key,
+    required this.scrollController,
+    required this.listOfStrings,
+    this.spacing,
+  });
 
   final ScrollController scrollController;
   final List<String> listOfStrings;
   final double? spacing;
+
   @override
   Widget build(BuildContext context) {
     final space =
@@ -56,13 +58,13 @@ class CustomBanner extends StatelessWidget {
     );
   }
 }
-
 class BannerText extends StatelessWidget {
   const BannerText({
     super.key,
     required this.label,
   });
   final String label;
+
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -73,5 +75,15 @@ class BannerText extends StatelessWidget {
         fontWeight: FontWeight.bold,
       ),
     );
+  }
+}
+
+
+class CautionBanner extends StatelessWidget {
+  const CautionBanner({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
