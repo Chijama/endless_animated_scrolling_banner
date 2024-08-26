@@ -20,7 +20,7 @@ class _EndlessScrollingAnimatedBannerState
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late ScrollController _scrollController;
-
+  
   @override
   void initState() {
     super.initState();

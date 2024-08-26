@@ -3,8 +3,8 @@ import 'dart:math' as math;
 
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomBanner extends StatelessWidget {
-  const CustomBanner({
+class SimpleBanner extends StatelessWidget {
+  const SimpleBanner({
     super.key,
     required this.scrollController,
     required this.listOfStrings,
@@ -58,6 +58,7 @@ class CustomBanner extends StatelessWidget {
     );
   }
 }
+
 class BannerText extends StatelessWidget {
   const BannerText({
     super.key,
@@ -77,7 +78,6 @@ class BannerText extends StatelessWidget {
     );
   }
 }
-
 
 class CautionBanner extends StatelessWidget {
   const CautionBanner({super.key});
