@@ -122,37 +122,46 @@
 import 'package:flutter/material.dart';
 
 class WarningBanner extends StatelessWidget {
-  //   final ScrollController scrollController;
-  // final List<String> listOfStrings;
-  // final double? spacing;
+  final Offset offset;
+  final List<String> listOfStrings;
+  final double? spacing;
 
-  // const WarningBanner({super.key, required this.scrollController, required this.listOfStrings, this.spacing});
+  const WarningBanner(
+      {super.key,
+      required this.offset,
+      required this.listOfStrings,
+      this.spacing});
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomPaint(
-          size: Size(double.infinity, 40),
-          painter: DiagonalStripesPainter(),
-        ),
-        Center(
-          child: Text(
-            'WARNING • WARNING',
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-        ),
-        Transform.flip(
-          flipX: true,
-          child: CustomPaint(
-            size: Size(double.infinity, 40),
+    double width = 1000;
+    return Transform.translate(
+      offset: offset,
+      child: Column(
+        children: [
+          CustomPaint(
+            size: Size(width, 40),
             painter: DiagonalStripesPainter(),
           ),
-        )
-      ],
+          Center(
+            child: Text(
+              'WARNING • WARNING',
+              style: TextStyle(
+                fontSize: 36,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          Transform.flip(
+            flipX: true,
+            child: CustomPaint(
+              size: Size(width, 40),
+              painter: DiagonalStripesPainter(),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
