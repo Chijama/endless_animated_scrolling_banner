@@ -26,10 +26,9 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
           ),
-
-          EndlessScrollingAnimatedBanner(
+          EndlessScrollingAnimatedBanner2(
             scrollSpeed: 3.5,
-            bannerBuilder2: (offSet) => WarningBanner(
+            bannerBuilder: (offSet) => WarningBanner(
               offset: offSet,
               listOfStrings: const [
                 "plan ",

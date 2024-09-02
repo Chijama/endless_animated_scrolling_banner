@@ -4,13 +4,11 @@ class EndlessScrollingAnimatedBanner extends StatefulWidget {
   const EndlessScrollingAnimatedBanner({
     super.key,
     required this.scrollSpeed,
-    this.bannerBuilder,
-    this.bannerBuilder2,
+    required this.bannerBuilder,
   });
 
   final double scrollSpeed;
-  final Widget Function(ScrollController)? bannerBuilder;
-  final Widget Function(Offset)? bannerBuilder2;
+  final Widget Function(ScrollController) bannerBuilder;
 
   @override
   State<EndlessScrollingAnimatedBanner> createState() =>
@@ -22,19 +20,15 @@ class _EndlessScrollingAnimatedBannerState
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late ScrollController _scrollController;
-  late final Animation<Offset> _animation =
-      Tween<Offset>(begin: Offset.zero, end: Offset(410, 0))
-          .animate(_animationController);
+
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 20),
+      duration: const Duration(seconds: 10),
     )..addListener(() {
-        setState(() {});
-
         _scrollController
             .jumpTo(_scrollController.position.pixels + widget.scrollSpeed);
         if (_scrollController.position.pixels >=
@@ -57,16 +51,59 @@ class _EndlessScrollingAnimatedBannerState
 
   @override
   Widget build(BuildContext context) {
-    if (widget.bannerBuilder != null) {
-      return Center(
-        child: widget.bannerBuilder!(_scrollController),
-      );
-    } else if (widget.bannerBuilder2 != null) {
-      return Center(
-        child: widget.bannerBuilder2!(_animation.value),
-      );
-    } else {
-      return Center(child: Text("No banner builder provided"));
-    }
+    return widget.bannerBuilder(_scrollController);
+  }
+}
+
+class EndlessScrollingAnimatedBanner2 extends StatefulWidget {
+  const EndlessScrollingAnimatedBanner2({
+    super.key,
+    required this.scrollSpeed,
+    required this.bannerBuilder,
+  });
+
+  final double scrollSpeed;
+
+  final Widget Function(Offset) bannerBuilder;
+
+  @override
+  State<EndlessScrollingAnimatedBanner2> createState() =>
+      _EndlessScrollingAnimatedBanner2State();
+}
+
+class _EndlessScrollingAnimatedBanner2State
+    extends State<EndlessScrollingAnimatedBanner2>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  late final Animation<Offset> _animation = Tween<Offset>(
+          begin: Offset.zero, end: const Offset( , 0))
+      .animate(_animationController);
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..addListener(() {
+        setState(() {});
+      });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _animationController.repeat();
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.bannerBuilder(_animation.value);
   }
 }

@@ -143,7 +143,7 @@ class WarningBanner extends StatelessWidget {
             size: Size(width, 40),
             painter: DiagonalStripesPainter(),
           ),
-          Center(
+          const Center(
             child: Text(
               'WARNING • WARNING',
               style: TextStyle(
