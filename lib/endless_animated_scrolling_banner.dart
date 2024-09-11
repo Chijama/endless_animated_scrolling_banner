@@ -76,16 +76,16 @@ class _EndlessScrollingAnimatedBanner2State
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
-  late final Animation<Offset> _animation = Tween<Offset>(
-          begin: Offset.zero, end: const Offset( , 0))
-      .animate(_animationController);
+  late final Animation<Offset> _animation =
+      Tween<Offset>(begin: Offset.zero, end: const Offset(-500, 0))
+          .animate(_animationController);
   @override
   void initState() {
     super.initState();
 
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(milliseconds: 3000),
     )..addListener(() {
         setState(() {});
       });

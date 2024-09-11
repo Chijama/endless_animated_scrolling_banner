@@ -119,6 +119,7 @@
 //   }
 // }
 
+import 'package:endless_animated_scrolling_banner/banner/simple_banner.dart';
 import 'package:flutter/material.dart';
 
 class WarningBanner extends StatelessWidget {
@@ -134,31 +135,63 @@ class WarningBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = 1000;
+    int numOfStripes = 120;
+
+    SizedBox horizontalSpace() {
+      return SizedBox(width: spacing ?? 20);
+    }
+
     return Transform.translate(
       offset: offset,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CustomPaint(
-            size: Size(width, 40),
-            painter: DiagonalStripesPainter(),
-          ),
-          const Center(
-            child: Text(
-              'WARNING • WARNING',
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: CustomPaint(
+              size: const Size(35, 35),
+              painter: DiagonalStripesPainter(
+                numberOfStripes: numOfStripes,
               ),
             ),
           ),
-          Transform.flip(
-            flipX: true,
-            child: CustomPaint(
-              size: Size(width, 40),
-              painter: DiagonalStripesPainter(),
+          Container(
+            alignment: Alignment.center,
+            height: 50,
+            child: ListView.separated(
+              // controller: scrollController,
+              scrollDirection: Axis.horizontal, shrinkWrap: true,
+              separatorBuilder: (context, index) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    horizontalSpace(),
+                    const CircleAvatar(
+                      radius: 8,
+                      backgroundColor: Colors.white,
+                    ),
+                    horizontalSpace(),
+                  ],
+                );
+              },
+              itemBuilder: (context, index) {
+                return BannerText(
+                    label: listOfStrings[index % listOfStrings.length]
+                        .toUpperCase());
+              },
+              itemCount: listOfStrings.length * 3100,
             ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Transform.flip(
+                flipX: true,
+                child: CustomPaint(
+                  size: const Size(35, 35),
+                  painter: DiagonalStripesPainter(
+                    numberOfStripes: numOfStripes,
+                  ),
+                )),
           )
         ],
       ),
@@ -166,19 +199,61 @@ class WarningBanner extends StatelessWidget {
   }
 }
 
+// class DiagonalStripesPainter extends CustomPainter {
+//   final int numStripes;
+
+//   DiagonalStripesPainter({required this.numStripes});
+
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     // Calculate the width and spacing based on the number of stripes
+//     double totalStripeWidth = size.width / numStripes;
+//     double stripeWidth = totalStripeWidth / 2;
+//     double stripeSpacing = totalStripeWidth;
+
+//     Paint paint = Paint()..color = Colors.black;
+
+//     for (double i = -size.height; i < size.width; i += stripeSpacing) {
+//       final path = Path()
+//         ..moveTo(i, 0)
+//         ..lineTo(i + stripeWidth, 0)
+//         ..lineTo(i + size.height + stripeWidth, size.height)
+//         ..lineTo(i + size.height, size.height)
+//         ..close();
+
+//       canvas.drawPath(path, paint);
+//     }
+//   }
+
+//   @override
+//   bool shouldRepaint(covariant CustomPainter oldDelegate) {
+//     return true; // Repaint when numStripes changes
+//   }
+// }
+
 class DiagonalStripesPainter extends CustomPainter {
+  final int numberOfStripes;
+
+  DiagonalStripesPainter({
+    required this.numberOfStripes,
+  });
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()..color = Colors.black;
     double stripeWidth = 20;
-    double stripeSpacing = 40;
+    double stripeSpacing = 15;
+    double stripeHeight = 40;
+    // Calculate the total width of all stripes including the spacing between them
+    double totalWidth = numberOfStripes * (stripeWidth + stripeSpacing);
 
-    for (double i = -size.height; i < size.width; i += stripeSpacing) {
+    // Draw the stripes
+    for (double i = 0; i < totalWidth; i += (stripeWidth + stripeSpacing)) {
       final path = Path()
         ..moveTo(i, 0)
         ..lineTo(i + stripeWidth, 0)
-        ..lineTo(i + size.height + stripeWidth, size.height)
-        ..lineTo(i + size.height, size.height)
+        ..lineTo(i + size.height + stripeWidth, stripeHeight)
+        ..lineTo(i + stripeHeight, stripeHeight)
         ..close();
 
       canvas.drawPath(path, paint);

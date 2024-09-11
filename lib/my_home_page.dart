@@ -10,7 +10,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.teal,
-      body: Column(
+      body: Column( mainAxisAlignment: MainAxisAlignment.center,
         children: [
           EndlessScrollingAnimatedBanner(
             scrollSpeed: 3.5,
@@ -26,20 +26,16 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
           ),
-          EndlessScrollingAnimatedBanner2(
-            scrollSpeed: 3.5,
-            bannerBuilder: (offSet) => WarningBanner(
-              offset: offSet,
-              listOfStrings: const [
-                "plan ",
-                "design ",
-                "implement ",
-                "test",
-                "deploy ",
-                "maintain"
-              ],
-            ),
-          ),
+          // const SizedBox(
+          //   height: 20,
+          // ),
+          // EndlessScrollingAnimatedBanner2(
+          //   scrollSpeed: 10,
+          //   bannerBuilder: (offSet) => WarningBanner(
+          //     offset: offSet,
+          //     listOfStrings: const ["WARNING", "DO NOT CROSS"],
+          //   ),
+          // ),
         ],
       ),
     );
