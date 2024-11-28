@@ -49,10 +49,11 @@ class SimpleBanner extends StatelessWidget {
           },
           itemBuilder: (context, index) {
             return BannerText(
+                color: Colors.white,
                 label:
                     listOfStrings[index % listOfStrings.length].toUpperCase());
           },
-          itemCount: listOfStrings.length * 3,
+          itemCount: listOfStrings.length * 50,
         ),
       ),
     );
@@ -63,16 +64,17 @@ class BannerText extends StatelessWidget {
   const BannerText({
     super.key,
     required this.label,
+    required this.color,
   });
   final String label;
-
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return Text(
       label,
       style: GoogleFonts.bebasNeue(
         fontSize: 37,
-        color: Colors.white,
+        color: color,
         fontWeight: FontWeight.bold,
       ),
     );
