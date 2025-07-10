@@ -29,7 +29,7 @@ EndlessScrollingAnimatedBanner(
   ),
 ),
  ```
-/// Vidie Illustration
+/// Video Illustration
 
 https://github.com/user-attachments/assets/8d603efa-d40a-4b6a-8788-ebf2614e9414
 
